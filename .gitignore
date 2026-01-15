@@ -1,0 +1,7 @@
+# Ignore compiled Java bytecode
+*.class
+
+# Ignore common build folders
+out/
+bin/
+target/
