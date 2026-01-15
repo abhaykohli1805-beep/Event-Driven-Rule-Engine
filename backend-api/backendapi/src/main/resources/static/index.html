@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Driven Rule Engine Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 12px 20px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .log {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Event-Driven Rule Engine</h1>
+<p>Click buttons to simulate events</p>
+
+<button onclick="loginFailed()">Simulate Login Failure</button><br>
+<button onclick="cpuHigh()">Simulate CPU High</button>
+
+<div class="log" id="log">Waiting for events...</div>
+
+<script>
+    function loginFailed() {
+        fetch('/events/login-failed', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ entityId: 'abhay' })
+        })
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('log').innerText = data;
+        });
+    }
+
+    function cpuHigh() {
+        fetch('/events/cpu-high', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ entityId: 'auth-service' })
+        })
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('log').innerText = data;
+        });
+    }
+</script>
+
+</body>
+</html>
